@@ -2,15 +2,15 @@ TinyMCE_Customizer
 ==================
 TinyMCE_Customizer ist eine Contao-Erweiterung um Konfigurationen für den TinyMCE RichtTextEditor zu erstellen.
 
-→ [Screenshots](_SCREENS/index.md)
+→ [Screenshots](TinyMCE_Customizer/_SCREENS/index.md)
 
-→ [Entwicklerdokumentation](DEVELOPER.md)
+→ [Entwicklerdokumentation](TinyMCE_Customizer/DEVELOPER.md)
 
 Sponsoren
 ---------
 Diese Erweiterung wurde finanziert von:
 
-* [InfinitySoft, Tristan Lins](www.infinitysoft.de)
+* [InfinitySoft, Tristan Lins](http://www.infinitysoft.de)
 * [certo web & design GmbH](http://www.certo-net.ch)
 * [contao4you.de](http://contao4you.de)
 * Tasten & Co
