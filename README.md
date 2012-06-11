@@ -17,7 +17,7 @@ Diese Erweiterung wurde finanziert von:
 * [www.lingo4u.de](http://www.lingo4u.de)
 * Bytepuzzle
 * [Dockmedia](http://www.dockmedia.de)
-* [planepix](www.weitzeldesign.de)
+* [planepix](http://www.weitzeldesign.de)
 * [www.kat-webdesign.de](http://www.kat-webdesign.de)
 * [netmediawork.de](http://netmediawork.de)
 * [Büro für visuelle Kommunikation | Nicky Hoff](http://www.hofff.com)
