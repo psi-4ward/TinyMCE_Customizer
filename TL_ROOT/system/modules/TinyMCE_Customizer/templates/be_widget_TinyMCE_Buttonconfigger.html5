@@ -1,0 +1,175 @@
+<?php $this->generate(); ?>
+
+<style type="text/css">
+	#unusedButtons {
+		height:65px;
+		padding: 10px;
+		border: 1px solid #ccc;
+		background-color: #f6f6f6;
+	}
+	#Buttonconfigger img.draggable {
+		cursor: move;
+		vertical-align: middle;
+		left: 0px;
+		top: 0px;
+		border: 1px solid #f6f6f6;
+	}
+
+	#Buttonconfigger img.draggable:hover {
+		border: 1px solid #0A246A;
+		background-color: #B2BBD0;
+	}
+
+	.buttonBar {
+		background: #f6f6f6;
+		height: 22px;
+		padding:3px;
+		border: 1px solid #ccc;
+	}
+</style>
+
+<div style="position: relative;" id="Buttonconfigger">
+	<h3>Unused Buttons</h3>
+	<div id="unusedButtons">
+		<?php foreach($this->unusedButtons as $btn): ?>
+		<img src="<?php echo $btn['image'];?>" alt="<?php echo $btn['label'];?>" title="<?php echo $btn['label'];?>" data-button="<?php echo $btn['value']; ?>" class="draggable" style="<?php echo $btn['size'];?>">
+		<?php endforeach; ?>
+	</div>
+
+<h3>Button Bar 1</h3>
+	<div id="ButtonBar1" class="buttonBar">
+		<?php foreach($this->buttonBar1 as $btn): ?>
+		<img src="<?php echo $btn['image'];?>" alt="<?php echo $btn['label'];?>" title="<?php echo $btn['label'];?>" data-button="<?php echo $btn['value']; ?>" class="draggable" style="<?php echo $btn['size'];?>">
+		<?php endforeach; ?>
+	</div>
+	<input id="ButtonBar1Input" type="hidden" name="<?php echo $this->strName; ?>[1]" value="<?php echo $this->varValue[1];?>">
+
+	<h3>Button Bar 2</h3>
+	<div id="ButtonBar2" class="buttonBar">
+		<?php foreach($this->buttonBar2 as $btn): ?>
+		<img src="<?php echo $btn['image'];?>" alt="<?php echo $btn['label'];?>" title="<?php echo $btn['label'];?>" data-button="<?php echo $btn['value']; ?>" class="draggable" style="<?php echo $btn['size'];?>">
+		<?php endforeach; ?>
+	</div>
+	<input id="ButtonBar2Input" type="hidden" name="<?php echo $this->strName; ?>[2]" value="<?php echo $this->varValue[2];?>">
+
+	<h3>Button Bar 3</h3>
+	<div id="ButtonBar3" class="buttonBar">
+		<?php foreach($this->buttonBar3 as $btn): ?>
+		<img src="<?php echo $btn['image'];?>" alt="<?php echo $btn['label'];?>" title="<?php echo $btn['label'];?>" data-button="<?php echo $btn['value']; ?>" class="draggable" style="<?php echo $btn['size'];?>">
+		<?php endforeach; ?>
+	</div>
+	<input id="ButtonBar3Input" type="hidden" name="<?php echo $this->strName; ?>[3]" value="<?php echo $this->varValue[3];?>">
+
+
+
+</div>
+
+<script>
+
+window.addEvent('domready', function(){
+
+	/* many tribute and thanks to Joe Ray Gregory aka may17 (joe@may17.de) for helping me a LOT with this javascript */
+
+	// add relay for Event Delegation for new dom clone elements
+    $$('#Buttonconfigger').addEvent('mousedown:relay(img.draggable)', function(event)
+	{
+		event.stop();
+		//store curent element
+		var el = this;
+		var cloneEl = el.clone()
+						.setStyles(el.getCoordinates())
+						.setStyles(
+						{
+		                    opacity: 0.7,
+		                    position: 'absolute'
+		                })
+						.inject(document.body);
+
+
+		var drag = new Drag.Move(cloneEl,
+		{
+        	droppables: $$('#unusedButtons, #ButtonBar1, #ButtonBar2, #ButtonBar3, #Buttonconfigger img.draggable'),
+
+            onDrop: function(dragging, destinationEl)
+			{
+				// destroy dragging element, it was only to see the icon under the mouse
+           		dragging.destroy();
+           		
+           		// clone 
+				if(el.get('data-button') == 'separator' && destinationEl.get('id') != 'unusedButtons')
+				{
+					//buffer clone in new variable
+                    var seperator = el.clone();
+				}
+				else if(el.get('data-button') == 'separator' && destinationEl.get('id') == 'unusedButtons')
+				{
+					// dont kill if we drop the unusedButtons seperator on unusedButtons
+					if(el.getParent().get('id') == 'unusedButtons') return;
+				
+					// drop on unusedButtons so kill the seperator
+					el.destroy();
+					ButtonconfiggerPrepareForSave();
+					return;
+				}
+
+                //Check if there is a element clone or use the element
+                var insertItem = seperator || el;
+
+            	if(destinationEl.get('tag') == 'img')
+				{
+                    insertItem.inject(destinationEl, 'after');
+                }
+				else
+				{
+                    insertItem.inject(destinationEl);
+                }
+
+				destinationEl.setStyle('background','#f0f0ee');
+
+				ButtonconfiggerPrepareForSave();
+            },
+
+			onEnter: function(dragging, destinationEl)
+			{
+				if(destinationEl.get('id') != 'unusedButtons')
+				{
+					destinationEl.setStyle('background', '#cccccc');
+				}
+			},
+
+			onLeave: function(dragging, destinationEl)
+			{
+				if(destinationEl.get('id') != 'unusedButtons')
+				{
+					destinationEl.setStyle('background', '#f0f0ee');
+				}
+			},
+
+			onCancel: function(dragging)
+			{
+				dragging.destroy();
+			}
+		});
+
+    	drag.start(event);
+
+    });
+
+	ButtonconfiggerPrepareForSave();
+
+});
+
+
+function ButtonconfiggerPrepareForSave()
+{
+	for(var i=1; i<=3; i++)
+	{
+		var tmp = '';
+		document.body.getElementById('ButtonBar'+i).getElements('img').each(function(el)
+		{
+			tmp = tmp + el.get('data-button') + ',';
+		});
+		document.body.getElementById('ButtonBar'+i+'Input').set('value',tmp);
+	}
+}
+</script>
