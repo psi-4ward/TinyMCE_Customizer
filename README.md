@@ -1,8 +1,10 @@
 TinyMCE_Customizer
 ==================
 TinyMCE_Customizer ist eine Contao-Erweiterung um Konfigurationen für den TinyMCE RichtTextEditor zu erstellen.
-[Screenshots](_SCREENS/index.md)
-[Entwicklerdokumentation](DEVELOPER.md)
+
+→ [Screenshots](_SCREENS/index.md)
+
+→ [Entwicklerdokumentation](DEVELOPER.md)
 
 Sponsoren
 ---------
@@ -61,7 +63,8 @@ Folgende Erweiterungen sind zur Verwendung des TinyMCE_Customizers nötig und m�
 * Erweiterung der Plugin- und Buttonauswahl
 * Eigene Filebrowser
 * Zusätzliche *content_css* Dateien
-[Entwicklerdokumentation](DEVELOPER.md)
+                          * 
+→ [Entwicklerdokumentation](DEVELOPER.md)
 
 Contact, Licence
 ----------------
@@ -70,3 +73,8 @@ Die Icons wurden dem [TinyMCE](http://tinymce.com) entnommen.
 
 ### Author
 Diese Erweiterung wurde von Christoph Wiechert, Firma [4ward.media](http://www.4wardmedia.de) entwickelt.
+
+Credits
+--------
+Vielen Dank an [Joe Ray Gregory](http://www.may17.de) für seine große Hilfe bei der Drag&Drop Funktionalität
+und [Mark Reimann](http://www.mediendepot-ruhr.de) bei den Vorüberlegungen der Verwendungs-Tabelle.
