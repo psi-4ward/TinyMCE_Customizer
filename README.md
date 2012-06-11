@@ -8,7 +8,7 @@ TinyMCE_Customizer ist eine Contao-Erweiterung um Konfigurationen für den TinyM
 
 Sponsoren
 ---------
-Diese Erweiterung ist wurde finanziert von:
+Diese Erweiterung wurde finanziert von:
 
 * [InfinitySoft, Tristan Lins](www.infinitysoft.de)
 * [certo web & design GmbH](http://www.certo-net.ch)
