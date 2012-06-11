@@ -14,7 +14,7 @@ $GLOBALS['TinyMCE_Customizer']['plugins'] = array
 (
 	'TinyMCE' => array
 	(
-		'buttons'					=> array( 'separator','bold','italic','underline','strikethrough','justifyleft',
+		'buttons'					=> array( 'separator','newdocument','bold','italic','underline','strikethrough','justifyleft',
 											  'justifycenter','justifyright','justifyfull','bullist','numlist','outdent',
 											  'indent','cut','copy','paste','undo','redo','link','unlink','image',
 											  'cleanup','help','code','hr','removeformat','formatselect','fontselect',
@@ -101,7 +101,7 @@ $GLOBALS['TinyMCE_Customizer']['plugins'] = array
 
 	'spellchecker' => array
 	(
-		// TODO fill array
+		'buttons'					=> array('spellchecker')
 	),
 
 	'style' => array
