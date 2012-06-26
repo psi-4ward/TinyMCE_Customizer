@@ -74,16 +74,25 @@ class TinyMCE_Customizer extends Controller
 						$useIt = false;
 					}
 				}
-				else {
+				else
+				{
 					if($table == 'tl_content' && $this->Input->get('id'))
 					{
 						$objCE = $this->Database->prepare('SELECT pid FROM tl_content WHERE id=?')
 							->execute($this->Input->get('id'));
-						$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')
-							->execute($objCE->pid);
 
-						$objPage = $this->getPageDetails($objArticle->pid);
-						if(count(array_intersect($objPage->trail, $objUsage->pages)) == 0)
+						if($objCE->numRows)
+						{
+							$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')
+								->execute($objCE->pid);
+
+							$objPage = $this->getPageDetails($objArticle->pid);
+							if(count(array_intersect($objPage->trail, $objUsage->pages)) == 0)
+							{
+								$useIt = false;
+							}
+						}
+						else
 						{
 							$useIt = false;
 						}
