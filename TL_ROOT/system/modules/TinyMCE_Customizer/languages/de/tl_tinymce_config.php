@@ -24,7 +24,7 @@ $GLOBALS['TL_LANG']['tl_tinymce_config']['directionality']						= array('Schreib
 $GLOBALS['TL_LANG']['tl_tinymce_config']['object_resizing']						= array('Größenänderungselemente anzeigen', 'Zeigt Elemente zur Größenänderung von Tabellen oder Bilder an.');
 $GLOBALS['TL_LANG']['tl_tinymce_config']['extended_valid_elements']				= array('Zusätzliche gültige Elemente', 'Hier kann eine kommaseparierte Liste mit weiteren gültigen HTML-Elementen angegeben werden. Bsp: blockquote,img[class|src|border=0|alt|title]');
 $GLOBALS['TL_LANG']['tl_tinymce_config']['formats']								= array('Eigene Formatierungen', 'Hier kann das Verhalten der TinyMCE Formatengine beeinflusst werden, siehe: http://www.tinymce.com/wiki.php/Configuration:formats');
-$GLOBALS['TL_LANG']['tl_tinymce_config']['style_formats']						= array('Eigene Style-Formatierungen', 'Hier kann das Verhalten des Style DropDowns beeinflusst werden, siehe: http://www.tinymce.com/wiki.php/Configuration:style_formats');
+$GLOBALS['TL_LANG']['tl_tinymce_config']['style_formats']						= array('Eigene Style-Formatierungen', 'Hier kann das Verhalten des Style DropDowns beeinflusst werden.');
 $GLOBALS['TL_LANG']['tl_tinymce_config']['indentation']							= array('Einrückungstiefe', 'Legt den Wert für die Einrücktiefe der <i>eindrücken</i>-Buttons fest. Bsp.: 20px');
 $GLOBALS['TL_LANG']['tl_tinymce_config']['preformatted']						= array('Erhalte Leerzeichen/Tabs', 'Ist dies Option aktiviert, verhält sich der Inhalt als wäre er in einem &lsaquo;pre&rsaquo;-Tag.');
 $GLOBALS['TL_LANG']['tl_tinymce_config']['theme_advanced_styles']				= array('Style-Dropdown', 'Diese Werte werden im Style-Dropdown angezeigt, falls keine hinterlegt werden, werden die Klassen der content_css Datei extrahiert.');

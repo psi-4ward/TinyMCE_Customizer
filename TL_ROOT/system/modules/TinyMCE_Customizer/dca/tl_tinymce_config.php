@@ -189,13 +189,15 @@ $GLOBALS['TL_DCA']['tl_tinymce_config'] = array
 		(
 			'label'						=> &$GLOBALS['TL_LANG']['tl_tinymce_config']['formats'],
 			'inputType'					=> 'textarea',
-			'eval'						=> array()
+			'eval'						=> array('helpwizard'=>true),
+			'explanation'				=> 'TinyMCE_Customizer_style_formats'
 		),
 		'style_formats' => array
 		(
 			'label'						=> &$GLOBALS['TL_LANG']['tl_tinymce_config']['style_formats'],
 			'inputType'					=> 'textarea',
-			'eval'						=> array()
+			'eval'						=> array('helpwizard'=>true),
+			'explanation'				=> 'TinyMCE_Customizer_style_formats'
 
 		),
 		'content_css' => array
