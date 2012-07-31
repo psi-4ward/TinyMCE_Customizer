@@ -69,7 +69,7 @@ class TinyMCE_Customizer extends Controller
 					$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')->execute($this->Input->get('id'));
 
 					$objPage = $this->getPageDetails($objArticle->pid);
-					if(count(array_intersect($objPage->trail,$objUsage->pages)) == 0)
+					if(!is_array($objPage->trail) || count(array_intersect($objPage->trail,$objUsage->pages)) == 0)
 					{
 						$useIt = false;
 					}
