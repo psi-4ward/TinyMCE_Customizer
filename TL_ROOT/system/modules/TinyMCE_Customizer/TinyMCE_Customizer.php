@@ -166,7 +166,7 @@ class TinyMCE_Customizer extends Controller
 
 
 			// if nothing predicts this rule, set the tiny config
-			if($useIt)
+			if($useIt && is_array($GLOBALS['TL_DCA'][$table]['fields']))
 			{
 				$objConfig = $this->Database->prepare('SELECT cleanInput,alias FROM tl_tinymce_config WHERE id=?')->execute($objUsage->configId);
 				if(!$objConfig->numRows)
