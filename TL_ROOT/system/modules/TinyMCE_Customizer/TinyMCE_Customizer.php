@@ -176,6 +176,9 @@ class TinyMCE_Customizer extends Controller
 
 				foreach($GLOBALS['TL_DCA'][$table]['fields'] as $field => $data)
 				{
+					// check for onlyTinyMceFields to replace only fields with rte=tinyMCE
+					if($objUsage->onlyTinyMceFields && $data['eval']['rte'] != 'tinyMCE') continue;
+
 					// if $arrFields[0] == '' acts like a wildcard matching all fields
 					if($objUsage->limitFields && !empty($arrFields[0]))
 					{

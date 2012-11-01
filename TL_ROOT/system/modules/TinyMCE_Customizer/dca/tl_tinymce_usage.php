@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_tinymce_usage'] = array
  	'palettes' => array
  	(
 		'__selector__'					=> array('limitUsers','limitGroups','limitPages','limitFields','limitLayouts'),
- 		'default'						=> '{name_legend},name,configId,sorting;{users_legend},limitUsers;{groups_legend},limitGroups;{pages_legend},limitPages;{layouts_legend},limitLayouts;{fields_legend},limitFields;{publish_legend},published',
+ 		'default'						=> '{name_legend},name,configId,sorting,onlyTinyMceFields;{users_legend},limitUsers;{groups_legend},limitGroups;{pages_legend},limitPages;{layouts_legend},limitLayouts;{fields_legend},limitFields;{publish_legend},published',
  	),
 
 	'subpalettes' => array
@@ -243,6 +243,12 @@ $GLOBALS['TL_DCA']['tl_tinymce_usage'] = array
  			'label'						=> &$GLOBALS['TL_LANG']['tl_tinymce_usage']['published'],
  			'inputType'					=> 'checkbox',
  			'eval'						=> array('doNotCopy'=>true),
+ 		),
+		'onlyTinyMceFields' => array
+ 		(
+ 			'label'						=> &$GLOBALS['TL_LANG']['tl_tinymce_usage']['onlyTinyMceFields'],
+ 			'inputType'					=> 'checkbox',
+ 			'eval'						=> array('tl_class'=>'w50 m12'),
  		),
  	)
 );
