@@ -24,7 +24,8 @@
  $GLOBALS['TL_LANG']['tl_tinymce_usage']['felder']			= array('Felder', 'Legen Sie die Seiten fest, auf denen diese Konfiguration verwendet werden kann.');
  $GLOBALS['TL_LANG']['tl_tinymce_usage']['layouts']			= array('Layouts', 'Legen Sie die Layouts fest, auf denen diese Konfiguration verwendet werden kann.');
  $GLOBALS['TL_LANG']['tl_tinymce_usage']['published']		= array('Zuweisung aktiviert', 'Hier kann die Verwendung explizit deaktiviert werden.');
- 
+ $GLOBALS['TL_LANG']['tl_tinymce_usage']['onlyTinyMceFields'] = array('Nur tinyMCE Felder ersetzen', 'Die Regel wird nur auf Felder angewandt, welche die standard Contao tinyMCE Konfiguration nutzen.');
+
  
  /**
   * Buttons

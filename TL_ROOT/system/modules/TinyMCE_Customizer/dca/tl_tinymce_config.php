@@ -446,7 +446,7 @@ class tl_tinymce_config extends System
 		}
 
 		$this->import('Database');
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_tinymce_config WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
 		if(!$objAlias->numRows)

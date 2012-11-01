@@ -176,6 +176,9 @@ class TinyMCE_Customizer extends Controller
 
 				foreach($GLOBALS['TL_DCA'][$table]['fields'] as $field => $data)
 				{
+					// check for onlyTinyMceFields to replace only fields with rte=tinyMCE
+					if($objUsage->onlyTinyMceFields && $data['eval']['rte'] != 'tinyMCE') continue;
+
 					// if $arrFields[0] == '' acts like a wildcard matching all fields
 					if($objUsage->limitFields && !empty($arrFields[0]))
 					{
@@ -435,6 +438,17 @@ class TinyMCE_Customizer extends Controller
 			{
 				$file = new File($file);
 				$arrData = deserialize($file->getContent());
+
+				// Generate an alias if there is none
+				if ($arrData['alias'] == '')
+				{
+					$arrData['alias'] = standardize($arrData['name']);
+					$objAlias = $this->Database->prepare("SELECT count(*) as cnt FROM tl_tinymce_config WHERE alias=?")->execute($arrData['alias']);
+					if($objAlias->cnt > 0)
+					{
+						$arrData['alias'] .= '-'.($objAlias->cnt+1);
+					}
+				}
 
 				$this->Database->prepare('INSERT INTO tl_tinymce_config %s')->set($arrData)->execute();
 				$this->addConfirmationMessage("File {$file->filename} impoted successfully. Configuration with Name <i>{$arrData['name']}</i> generated.");

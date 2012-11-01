@@ -68,5 +68,6 @@ CREATE TABLE `tl_tinymce_usage` (
   `limitLayouts` char(1) NOT NULL default '',
   `layouts` blob NULL,
   `published` char(1) NOT NULL default '',
+  `onlyTinyMceFields` char(1) NOT NULL default '',
   PRIMARY KEY  (`id`),
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
