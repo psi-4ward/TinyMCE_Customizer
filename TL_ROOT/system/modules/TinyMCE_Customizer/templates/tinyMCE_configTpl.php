@@ -10,7 +10,8 @@
  * its generated through TinyMCE_Customzier so dont edit it, changes will be overwritten!
  */
 if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
-<script src="<\?php echo $this->base; ?>plugins/tinyMCE/tiny_mce_gzip.js"></script>
+
+<\?php if(!isset($GLOBALS['TL_JAVASCRIPT']['tinyMCE'])): ?>
 <script>
 tinyMCE_GZ.init({
   plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
@@ -19,9 +20,21 @@ tinyMCE_GZ.init({
   disk_cache : false,
   debug : false
 });
+<\?php $GLOBALS['TL_JAVASCRIPT']['tinyMCE'] = 'plugins/tinyMCE/tiny_mce_gzip.js'; ?>
+
+var orgExecCommand = tinyMCE.execCommand;
+tinyMCE.execCommand = function(command, ui, value) {
+  if (typeof tinySettings[value] !== 'undefined') {
+    this.init(tinySettings[value]);
+  }
+  orgExecCommand.call(this, command, ui, value);
+};
 </script>
+<\?php endif; ?>
+
 <script>
-tinyMCE.init({
+
+window.tinyInit = {
   mode : "none",
   height : "<?php echo (!empty($objCfg->height)) ? $objCfg->height : '300'; ?>",
   language : "<\?php echo $this->language; ?>",
@@ -92,7 +105,7 @@ tinyMCE.init({
   theme_advanced_buttons<?php echo $i; ?> : "<?php echo $objCfg->buttons[$i];?>",
 <?php endfor; ?>
   theme_advanced_statusbar_location : "<?php echo ($objCfg->theme_advanced_statusbar_location) ? 'bottom' : 'none'; ?>"
-});
+};
 
 <?php if(strlen($objCfg->file_browser_callback)): ?>
 function customTinyMceFilebrowser<?php echo $this->id;?>(field_name, url, type, win)
@@ -100,6 +113,20 @@ function customTinyMceFilebrowser<?php echo $this->id;?>(field_name, url, type, 
 <?php echo $objCfg->file_browser_javascript; ?>
 }
 <?php endif; ?>
+
+if (typeof window.tinySettings === 'undefined') {
+  //only declare once..
+  window.tinySettings = {};
+}
+
+<\?php
+$arrRteFields = trimsplit(',', $this->rteFields);
+foreach($arrRteFields as $strRteField):
+?>
+window.tinySettings['<\?php echo $strRteField?>'] = Object.merge({}, window.tinyInit);
+<\?php
+endforeach;
+?>
 
 </script>
 <\?php endif; ?>
