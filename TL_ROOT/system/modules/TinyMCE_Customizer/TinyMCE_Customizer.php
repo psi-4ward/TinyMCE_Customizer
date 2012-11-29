@@ -209,8 +209,6 @@ class TinyMCE_Customizer extends Controller
 
 				}
 
-				// usage-rule matched and is applied, we've done
-				return;
 			}
 		}
 
