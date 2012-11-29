@@ -10,6 +10,12 @@ class TinyMCE_Customizer extends Controller
 {
 
 	/**
+	 * remember all replaced fields
+	 * @var array
+	 */
+	protected static $arrAssigend = array();
+
+	/**
 	 * Set the new tinyMCE config as rte-eval-parameter
 	 * if the conditions match
 	 *
@@ -176,6 +182,9 @@ class TinyMCE_Customizer extends Controller
 
 				foreach($GLOBALS['TL_DCA'][$table]['fields'] as $field => $data)
 				{
+					// dont replace a field again
+					if(isset($field,self::$arrAssigend[$table]) && in_array($field,self::$arrAssigend[$table])) continue;
+
 					// check for onlyTinyMceFields to replace only fields with rte=tinyMCE
 					if($objUsage->onlyTinyMceFields && $data['eval']['rte'] != 'tinyMCE') continue;
 
@@ -185,6 +194,7 @@ class TinyMCE_Customizer extends Controller
 						if($data['eval']['rte'] && in_array($field,$arrFields))
 						{
 							$GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rte'] = 'tinyMCE_'.$objConfig->alias;
+							self::$arrAssigend[$table][] = $field;
 
 							// add htmlCleaner callback
 							if($objConfig->cleanInput)
@@ -198,6 +208,7 @@ class TinyMCE_Customizer extends Controller
 						if($data['eval']['rte'])
 						{
 							$GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rte'] = 'tinyMCE_'.$objConfig->alias;
+							self::$arrAssigend[$table][] = $field;
 
 							// add htmlCleaner callback
 							if($objConfig->cleanInput)
@@ -209,8 +220,6 @@ class TinyMCE_Customizer extends Controller
 
 				}
 
-				// usage-rule matched and is applied, we've done
-				return;
 			}
 		}
 
