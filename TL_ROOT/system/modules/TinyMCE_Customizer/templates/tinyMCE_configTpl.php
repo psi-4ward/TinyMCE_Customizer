@@ -33,7 +33,8 @@ tinyMCE.execCommand = function(command, ui, value) {
 <\?php endif; ?>
 
 <script>
-var tinyInit = {
+
+window.tinyInit = {
   mode : "none",
   height : "<?php echo (!empty($objCfg->height)) ? $objCfg->height : '300'; ?>",
   language : "<\?php echo $this->language; ?>",
@@ -122,7 +123,7 @@ if (typeof window.tinySettings === 'undefined') {
 $arrRteFields = trimsplit(',', $this->rteFields);
 foreach($arrRteFields as $strRteField):
 ?>
-window.tinySettings['<\?php echo $strRteField?>'] = Object.merge({}, tinyInit);
+window.tinySettings['<\?php echo $strRteField?>'] = Object.merge({}, window.tinyInit);
 <\?php
 endforeach;
 ?>
