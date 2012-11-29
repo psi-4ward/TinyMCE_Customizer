@@ -22,19 +22,21 @@ tinyMCE_GZ.init({
 });
 <\?php $GLOBALS['TL_JAVASCRIPT']['tinyMCE'] = 'plugins/tinyMCE/tiny_mce_gzip.js'; ?>
 
-var orgExecCommand = tinyMCE.execCommand;
+var org_tinyMCEexecCommand = tinyMCE.execCommand;
 tinyMCE.execCommand = function(command, ui, value) {
-  if (typeof tinySettings[value] !== 'undefined') {
-    this.init(tinySettings[value]);
+  if (typeof tinyMCEsettings[value] !== 'undefined') {
+    this.init(tinyMCEsettings[value]);
   }
-  orgExecCommand.call(this, command, ui, value);
+  org_tinyMCEexecCommand.call(this, command, ui, value);
 };
+window.tinyMCEsettings = {};
 </script>
 <\?php endif; ?>
 
 <script>
 
-window.tinyInit = {
+(function(){
+var tinyMCEcfg = {
   mode : "none",
   height : "<?php echo (!empty($objCfg->height)) ? $objCfg->height : '300'; ?>",
   language : "<\?php echo $this->language; ?>",
@@ -106,27 +108,21 @@ window.tinyInit = {
 <?php endfor; ?>
   theme_advanced_statusbar_location : "<?php echo ($objCfg->theme_advanced_statusbar_location) ? 'bottom' : 'none'; ?>"
 };
-
+<\?php
+$arrRteFields = trimsplit(',', $this->rteFields);
+foreach($arrRteFields as $strRteField):
+?>
+window.tinyMCEsettings['<\?php echo $strRteField?>'] = Object.merge({}, tinyMCEcfg);
+<\?php
+endforeach;
+?>
+})();
 <?php if(strlen($objCfg->file_browser_callback)): ?>
 function customTinyMceFilebrowser<?php echo $this->id;?>(field_name, url, type, win)
 {
 <?php echo $objCfg->file_browser_javascript; ?>
 }
 <?php endif; ?>
-
-if (typeof window.tinySettings === 'undefined') {
-  //only declare once..
-  window.tinySettings = {};
-}
-
-<\?php
-$arrRteFields = trimsplit(',', $this->rteFields);
-foreach($arrRteFields as $strRteField):
-?>
-window.tinySettings['<\?php echo $strRteField?>'] = Object.merge({}, window.tinyInit);
-<\?php
-endforeach;
-?>
 
 </script>
 <\?php endif; ?>
