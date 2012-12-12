@@ -9,13 +9,16 @@
 $GLOBALS['BE_MOD']['system']['TinyMCE_Customizer'] = array(
 	'tables'  	=> array('tl_tinymce_config','tl_tinymce_usage'),
 	'icon'    	=> 'system/modules/TinyMCE_Customizer/html/icon.png',
-	'help'	  	=> array('TinyMCE_Customizer','help'),
-	'import' 	=> array('TinyMCE_Customizer', 'importConfig'),
-	'export' 	=> array('TinyMCE_Customizer', 'exportConfig'),
+	'help'	  	=> array('\TinyMCE_Customizer\TinyMCE_Customizer','help'),
+	'import' 	=> array('\TinyMCE_Customizer\TinyMCE_Customizer', 'importConfig'),
+	'export' 	=> array('\TinyMCE_Customizer\TinyMCE_Customizer', 'exportConfig'),
 );
 
 // Widget
-$GLOBALS['BE_FFL']['TinyMCE_Buttonconfigger'] = 'WidgetTinyMCE_Buttonconfigger';
+$GLOBALS['BE_FFL']['TinyMCE_Buttonconfigger'] = '\TinyMCE_Customizer\WidgetTinyMCE_Buttonconfigger';
 
-// HOOK
-$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('TinyMCE_Customizer','replaceRteConfig');
+if(\Input::get('do') != 'repository_manager')
+{
+	// HOOK
+	$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('\TinyMCE_Customizer\TinyMCE_Customizer','replaceRteConfig');
+}

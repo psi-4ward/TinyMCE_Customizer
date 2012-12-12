@@ -10,8 +10,7 @@
  * its generated through TinyMCE_Customzier so dont edit it, changes will be overwritten!
  */
 if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
-
-<\?php if(!isset($GLOBALS['TL_JAVASCRIPT']['tinyMCE'])): ?>
+<script src="<\?php echo $this->base; ?>assets/tinymce/tiny_mce_gzip.js"></script>
 <script>
 tinyMCE_GZ.init({
   plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
@@ -20,23 +19,9 @@ tinyMCE_GZ.init({
   disk_cache : false,
   debug : false
 });
-<\?php $GLOBALS['TL_JAVASCRIPT']['tinyMCE'] = 'plugins/tinyMCE/tiny_mce_gzip.js'; ?>
-
-var org_tinyMCEexecCommand = tinyMCE.execCommand;
-tinyMCE.execCommand = function(command, ui, value) {
-  if (typeof tinyMCEsettings[value] !== 'undefined') {
-    this.init(tinyMCEsettings[value]);
-  }
-  org_tinyMCEexecCommand.call(this, command, ui, value);
-};
-window.tinyMCEsettings = {};
 </script>
-<\?php endif; ?>
-
 <script>
-
-(function(){
-var tinyMCEcfg = {
+tinyMCE.init({
   mode : "none",
   height : "<?php echo (!empty($objCfg->height)) ? $objCfg->height : '300'; ?>",
   language : "<\?php echo $this->language; ?>",
@@ -107,16 +92,8 @@ var tinyMCEcfg = {
   theme_advanced_buttons<?php echo $i; ?> : "<?php echo $objCfg->buttons[$i];?>",
 <?php endfor; ?>
   theme_advanced_statusbar_location : "<?php echo ($objCfg->theme_advanced_statusbar_location) ? 'bottom' : 'none'; ?>"
-};
-<\?php
-$arrRteFields = trimsplit(',', $this->rteFields);
-foreach($arrRteFields as $strRteField):
-?>
-window.tinyMCEsettings['<\?php echo $strRteField?>'] = Object.merge({}, tinyMCEcfg);
-<\?php
-endforeach;
-?>
-})();
+});
+
 <?php if(strlen($objCfg->file_browser_callback)): ?>
 function customTinyMceFilebrowser<?php echo $this->id;?>(field_name, url, type, win)
 {

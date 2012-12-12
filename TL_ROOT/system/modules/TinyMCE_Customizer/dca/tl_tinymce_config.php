@@ -423,7 +423,7 @@ class tl_tinymce_config extends System
 	public function generateConfigfile(DataContainer $dc)
 	{
 
-		$this->import('TinyMCE_Customizer');
+		$this->import('\TinyMCE_Customizer\TinyMCE_Customizer','TinyMCE_Customizer');
 		$this->TinyMCE_Customizer->generateConfigfile($dc->id);
 	}
 

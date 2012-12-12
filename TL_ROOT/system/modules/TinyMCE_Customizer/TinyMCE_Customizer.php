@@ -1,19 +1,14 @@
-<?php if(!defined('TL_ROOT')) {die('You cannot access this file directly!');
-}
+<?php
 
 /**
  * @copyright 4ward.media 2012 <http://www.4wardmedia.de>
  * @author Christoph Wiechert <wio@psitrax.de>
  */
- 
-class TinyMCE_Customizer extends Controller
-{
 
-	/**
-	 * remember all replaced fields
-	 * @var array
-	 */
-	protected static $arrAssigend = array();
+namespace Psi\TinyMCE_Customizer;
+
+class TinyMCE_Customizer extends \Controller
+{
 
 	/**
 	 * Set the new tinyMCE config as rte-eval-parameter
@@ -92,7 +87,7 @@ class TinyMCE_Customizer extends Controller
 							$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')
 								->execute($objCE->pid);
 
-							$objPage = $this->getPageDetails($objArticle->pid);
+							$objPage = PageModel::findWithDetails($objArticle->pid);
 							if(count(array_intersect($objPage->trail, $objUsage->pages)) == 0)
 							{
 								$useIt = false;
@@ -120,7 +115,7 @@ class TinyMCE_Customizer extends Controller
 				{
 					$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')->execute($this->Input->get('id'));
 
-					$objPage = $this->getPageDetails($objArticle->pid);
+					$objPage = PageModel::findWithDetails($objArticle->pid);
 					if(!in_array($objPage->layout,$objUsage->layouts))
 					{
 						$useIt = false;
@@ -134,7 +129,7 @@ class TinyMCE_Customizer extends Controller
 						$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')
 							->execute($objCE->pid);
 
-						$objPage = $this->getPageDetails($objArticle->pid);
+						$objPage = PageModel::findWithDetails($objArticle->pid);
 						if(!in_array($objPage->layout,$objUsage->layouts))
 						{
 							$useIt = false;
@@ -182,9 +177,6 @@ class TinyMCE_Customizer extends Controller
 
 				foreach($GLOBALS['TL_DCA'][$table]['fields'] as $field => $data)
 				{
-					// dont replace a field again
-					if(isset($field,self::$arrAssigend[$table]) && in_array($field,self::$arrAssigend[$table])) continue;
-
 					// check for onlyTinyMceFields to replace only fields with rte=tinyMCE
 					if($objUsage->onlyTinyMceFields && $data['eval']['rte'] != 'tinyMCE') continue;
 
@@ -194,7 +186,6 @@ class TinyMCE_Customizer extends Controller
 						if($data['eval']['rte'] && in_array($field,$arrFields))
 						{
 							$GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rte'] = 'tinyMCE_'.$objConfig->alias;
-							self::$arrAssigend[$table][] = $field;
 
 							// add htmlCleaner callback
 							if($objConfig->cleanInput)
@@ -208,7 +199,6 @@ class TinyMCE_Customizer extends Controller
 						if($data['eval']['rte'])
 						{
 							$GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rte'] = 'tinyMCE_'.$objConfig->alias;
-							self::$arrAssigend[$table][] = $field;
 
 							// add htmlCleaner callback
 							if($objConfig->cleanInput)
@@ -220,6 +210,8 @@ class TinyMCE_Customizer extends Controller
 
 				}
 
+				// usage-rule matched and is applied, we've done
+				return;
 			}
 		}
 
@@ -411,12 +403,12 @@ class TinyMCE_Customizer extends Controller
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tinymce_config_import')
 		{
 			$this->import('Database');
-			$source = $this->Input->post('source', true);
+			$source = explode(',',$this->Input->post('source', true));
 
 			// Check the file names
 			if (!$source || !is_array($source))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -425,27 +417,35 @@ class TinyMCE_Customizer extends Controller
 			// Skip invalid entries
 			foreach ($source as $cfgFile)
 			{
-				// Skip folders
-				if (is_dir(TL_ROOT . '/' . $cfgFile))
+				$objFile = \FilesModel::findByPk($cfgFile);
+
+				if(!$objFile || !is_file(TL_ROOT.'/'.$objFile->path))
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($cfgFile)));
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objFile->path));
 					continue;
 				}
 
-				$arrFiles[] = $cfgFile;
+				// Skip folders
+				if ($objFile->type == 'folder')
+				{
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], $objFile->path));
+					continue;
+				}
+
+				$arrFiles[] = $objFile->path;
 			}
 
 			// Check wether there are any files left
 			if (empty($arrFiles))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
 			// import the files
 			foreach($arrFiles as $file)
 			{
-				$file = new File($file);
+				$file = new \File($file);
 				$arrData = deserialize($file->getContent());
 
 				// Generate an alias if there is none
@@ -460,7 +460,7 @@ class TinyMCE_Customizer extends Controller
 				}
 
 				$this->Database->prepare('INSERT INTO tl_tinymce_config %s')->set($arrData)->execute();
-				$this->addConfirmationMessage("File {$file->filename} impoted successfully. Configuration with Name <i>{$arrData['name']}</i> generated.");
+				\Message::addConfirmation("File {$file->filename} impoted successfully. Configuration with Name <i>{$arrData['name']}</i> generated.");
 				$file->close();
 			}
 
@@ -468,7 +468,7 @@ class TinyMCE_Customizer extends Controller
 		}
 
 		$this->loadDataContainer('tl_tinymce_config');
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_tinymce_config']['fields']['source'], 'source', null, 'source', 'tl_tinymce_config'));
+		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_tinymce_config']['fields']['source'], 'source', null, 'source', 'tl_tinymce_config'));
 
 		// Return the form
 		return '
@@ -477,7 +477,7 @@ class TinyMCE_Customizer extends Controller
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_tinymce_config']['import'][1].'</h2>
-'.$this->getMessages().'
+'.\Message::generate().'
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_tinymce_config_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_tinymce_config_import">
