@@ -513,12 +513,12 @@ class tl_tinymce_config extends System
 				continue;
 			}
 
-			if(substr($plugin,0,1) != '-' && !file_exists(TL_ROOT.'/plugins/tinyMCE/plugins/'.$plugin))
+			if(substr($plugin,0,1) != '-' && !file_exists(TL_ROOT.'/assets/tinymce/plugins/'.$plugin))
 			{
 
 				if($GLOBALS['TL_CONFIG']['debugMode'])
 				{
-					$GLOBALS['TL_DEBUG'][] = 'Skipping TinyMCE Plugin "'.$plugin.'" cause theres no such folder in plugins/tinyMCE/plugins';
+					$GLOBALS['TL_DEBUG'][] = 'Skipping TinyMCE Plugin "'.$plugin.'" cause theres no such folder in assets/tinymce/plugins';
 				}
 
 				continue;

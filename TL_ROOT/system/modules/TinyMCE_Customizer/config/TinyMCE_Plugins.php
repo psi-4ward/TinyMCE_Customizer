@@ -139,8 +139,8 @@ $GLOBALS['TinyMCE_Customizer']['plugins'] = array
 		// custom images
 		'buttonImages'				=> array
 		(
-			'typolinks'	=> 'plugins/tinyMCE/plugins/typolinks/img/link.gif',
-			'typobox'	=> 'plugins/tinyMCE/plugins/typolinks/img/image.gif',
+			'typolinks'	=> 'assets/tinymce/plugins/typolinks/img/link.gif',
+			'typobox'	=> 'assets/tinymce/plugins/typolinks/img/image.gif',
 		)
 	)
 
