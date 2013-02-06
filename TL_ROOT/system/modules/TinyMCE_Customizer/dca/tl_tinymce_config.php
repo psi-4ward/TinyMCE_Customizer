@@ -422,7 +422,6 @@ class tl_tinymce_config extends System
 	 */
 	public function generateConfigfile(DataContainer $dc)
 	{
-
 		$this->import('\TinyMCE_Customizer\TinyMCE_Customizer','TinyMCE_Customizer');
 		$this->TinyMCE_Customizer->generateConfigfile($dc->id);
 	}
@@ -518,7 +517,7 @@ class tl_tinymce_config extends System
 
 				if($GLOBALS['TL_CONFIG']['debugMode'])
 				{
-					$GLOBALS['TL_DEBUG'][] = 'Skipping TinyMCE Plugin "'.$plugin.'" cause theres no such folder in assets/tinymce/plugins';
+					$GLOBALS['TL_DEBUG'][] = 'Skipping TinyMCE Plugin "'.$plugin.'" cause theres no such folder in plugins/tinyMCE/plugins';
 				}
 
 				continue;

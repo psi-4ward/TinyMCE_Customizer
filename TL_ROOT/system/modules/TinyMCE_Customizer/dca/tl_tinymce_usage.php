@@ -156,8 +156,8 @@ $GLOBALS['TL_DCA']['tl_tinymce_usage'] = array
 				'tl_class'				=> 'clr',
 				'foreignTable'			=> 'tl_user',
 				'fieldType'				=> 'checkbox',
-				'listFields'			=> array('id', 'username','name'),
-				'searchFields'			=> array('id', 'username','name'),
+				'listFields'			=> array('id', 'username', 'name'),
+				'searchFields'			=> array('id', 'username', 'name'),
 				'searchLabel'			=> &$GLOBALS['TL_LANG']['MSC']['searchLabel'],
 			)
 		),

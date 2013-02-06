@@ -1,6 +1,4 @@
 <?php if (!defined('TL_ROOT')) die('You cannot access this file directly!'); ?>
-
-
 <\?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
@@ -39,8 +37,8 @@ tinyMCE.init({
   save_on_tinymce_forms : true,
   init_instance_callback : "TinyCallback.getScrollOffset",
   advimage_update_dimensions_onchange : false,
-  external_image_list_url : "<\?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typoimages.php",
-  template_external_list_url : "<\?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
+  external_image_list_url : "<\?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",
+  template_external_list_url : "<\?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",
   plugins : "<?php echo implode(',',$objCfg->plugins); ?>",
   spellchecker_languages : "<\?php echo $this->getSpellcheckerString(); ?>",
   content_css : "<?php echo implode(',',$objCfg->content_css); ?>",
