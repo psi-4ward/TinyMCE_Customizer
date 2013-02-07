@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_tinymce_config'] = array
  			),
 			'export' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['export'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_tinymce_config']['export'],
 				'href'                => 'key=export',
 				'icon'                => 'theme_export.gif'
 			),

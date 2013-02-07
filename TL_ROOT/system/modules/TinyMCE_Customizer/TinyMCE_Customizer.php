@@ -376,7 +376,7 @@ class TinyMCE_Customizer extends \Controller
 	 * @param DataContainer $dc
 	 * @return string
 	 */
-	public function cleanHtmlCode($varValue, DataContainer $dc)
+	public function cleanHtmlCode($varValue, \DataContainer $dc)
 	{
 		$this->import('Database');
 
@@ -506,10 +506,10 @@ class TinyMCE_Customizer extends \Controller
 	 * Export a configuration
 	 * and provide as download
 	 *
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string|void
 	 */
-	public function exportConfig(DataContainer $dc)
+	public function exportConfig(\DataContainer $dc)
 	{
 		$this->import('Database');
 
@@ -543,7 +543,7 @@ class TinyMCE_Customizer extends \Controller
 
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $objConfig->alias . '.TinyMceConfig"');
+		header('Content-Disposition: attachment; filename="' . $objConfig->alias . '.TinyMceConfig"', true);
 		header('Content-Length: ' . strlen($strData));
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
