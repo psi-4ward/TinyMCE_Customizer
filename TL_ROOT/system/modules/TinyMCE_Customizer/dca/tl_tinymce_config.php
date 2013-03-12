@@ -203,9 +203,9 @@ $GLOBALS['TL_DCA']['tl_tinymce_config'] = array
 		'content_css' => array
 		(
 			'label'						=> &$GLOBALS['TL_LANG']['tl_tinymce_config']['content_css'],
-			'inputType'					=> 'checkbox',
+			'inputType'					=> 'customselect',
 			'options_callback'			=> array('tl_tinymce_config','getContentCss'),
-			'eval'						=> array('multiple' => true)
+			'eval'						=> array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 
 		'height' => array
@@ -466,8 +466,8 @@ class tl_tinymce_config extends System
 
 		$arrFiles = array
 		(
-			'tl_files/tinymce.css',
-			'basic.css'
+			'tl_files/tinymce.css'=>'tl_files/tinymce.css',
+			'basic.css' => 'basic.css',
 		);
 
 		foreach($arrFiles as $k => $file)
