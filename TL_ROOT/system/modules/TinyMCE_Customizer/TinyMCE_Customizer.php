@@ -190,7 +190,7 @@ class TinyMCE_Customizer extends \Controller
 							// add htmlCleaner callback
 							if($objConfig->cleanInput)
 							{
-								$GLOBALS['TL_DCA'][$table]['fields'][$field]['save_callback'][] = array('TinyMCE_Customizer','cleanHtmlCode');
+								$GLOBALS['TL_DCA'][$table]['fields'][$field]['save_callback'][] = array('TinyMCE_Customizer\TinyMCE_Customizer','cleanHtmlCode');
 							}
 						}
 					}
@@ -203,7 +203,7 @@ class TinyMCE_Customizer extends \Controller
 							// add htmlCleaner callback
 							if($objConfig->cleanInput)
 							{
-								$GLOBALS['TL_DCA'][$table]['fields'][$field]['save_callback'][] = array('TinyMCE_Customizer','cleanHtmlCode');
+								$GLOBALS['TL_DCA'][$table]['fields'][$field]['save_callback'][] = array('TinyMCE_Customizer\TinyMCE_Customizer','cleanHtmlCode');
 							}
 						}
 					}
