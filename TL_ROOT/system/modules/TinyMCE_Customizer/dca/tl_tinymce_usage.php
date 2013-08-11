@@ -285,12 +285,13 @@ class tl_tinymce_usage extends Backend
 
 	/**
 	 * Find rte-fields in the DCA of the chosen table
-	 * @param $obj
 	 * @return array
 	 */
-	public function getFields($obj)
+	public function getFields()
 	{
-		$tbl = $obj->value[self::$getFieldsIterator]['table'];
+		$obj = $this->Database->prepare('SELECT fields FROM tl_tinymce_usage WHERE id=?')->execute(\Input::get('id'));
+		$arrFields = deserialize($obj->fields, true);
+		$tbl = $arrFields[self::$getFieldsIterator]['table'];
 
 		$this->loadDataContainer($tbl);
 
