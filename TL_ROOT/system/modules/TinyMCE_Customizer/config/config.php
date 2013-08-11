@@ -17,7 +17,7 @@ $GLOBALS['BE_MOD']['system']['TinyMCE_Customizer'] = array(
 // Widget
 $GLOBALS['BE_FFL']['TinyMCE_Buttonconfigger'] = '\TinyMCE_Customizer\WidgetTinyMCE_Buttonconfigger';
 
-if(\Input::get('do') != 'repository_manager')
+if(\Input::get('do') != 'repository_manager' && \Input::get('do') != 'composer')
 {
 	// HOOK
 	$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('\TinyMCE_Customizer\TinyMCE_Customizer','replaceRteConfig');
