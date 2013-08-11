@@ -278,7 +278,7 @@ class TinyMCE_Customizer extends \Controller
 		}
 
 		// fetch custom filebrowser javascript
-		$arrFilebrowsers = array();
+		$arrFilebrowsers = $GLOBALS['TinyMCE_Customizer']['fileBrowsers'];
 		if(strlen($objCfg->file_browser_callback))
 		{
 			if (isset($GLOBALS['TL_HOOKS']['TinyMCE_Customizer_Filebrowser']) && is_array($GLOBALS['TL_HOOKS']['TinyMCE_Customizer_Filebrowser']))
@@ -286,7 +286,8 @@ class TinyMCE_Customizer extends \Controller
 				foreach ($GLOBALS['TL_HOOKS']['TinyMCE_Customizer_Filebrowser'] as $callback)
 				{
 					$this->import($callback[0]);
-					$arrFilebrowsers = $this->$callback[0]->$callback[1]($arr,$dc);
+					$arr = $this->$callback[0]->$callback[1]($arrFilebrowsers, $dc);
+					if(is_array($arr)) $arrFilebrowsers = array_merge($arrFilebrowsers, $arr);
 				}
 			}
 			$objCfg->file_browser_javascript = $arrFilebrowsers[$objCfg->file_browser_callback]['javascript'];

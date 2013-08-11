@@ -146,6 +146,18 @@ $GLOBALS['TinyMCE_Customizer']['plugins'] = array
 
 );
 
+
+// Some default file-browsers
+$GLOBALS['TinyMCE_Customizer']['fileBrowsers'] = array
+(
+	'contao' => array
+	(
+		'label'			=> 'Contao standard filebrowser',
+		'javascript'	=> 'TinyCallback.fileBrowser(field_name, url, type, win);'
+	)
+);
+
+
 // HOOK: Let other extensions alter this array
 if (isset($GLOBALS['TL_HOOKS']['TinyMCE_Customizer_Pluginconfig']) && is_array($GLOBALS['TL_HOOKS']['TinyMCE_Customizer_Pluginconfig']))
 {

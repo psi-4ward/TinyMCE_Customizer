@@ -385,7 +385,7 @@ class tl_tinymce_config extends System
 
 	public function getFilebrowsers($dc)
 	{
-		$arrFilebrowsers = array();
+		$arrFilebrowsers = $GLOBALS['TinyMCE_Customizer']['fileBrowsers'];
 
 		/*
 		$arr['filebrowserKey'] = array
