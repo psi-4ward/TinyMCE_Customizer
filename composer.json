@@ -30,7 +30,7 @@
 				"TL_ROOT/system/modules/TinyMCE_Customizer": "system/modules/_TinyMCE_Customizer",
 				"TL_ROOT/assets/tinymce/plugins/contextmenu": "assets/tinymce/plugins/contextmenu",
 				"TL_ROOT/assets/tinymce/plugins/fullscreen": "assets/tinymce/plugins/fullscreen",
-				"TL_ROOT/assets/tinymce/plugins/visualchars": "assets/tinymce/plugins/visualchars",
+				"TL_ROOT/assets/tinymce/plugins/visualchars": "assets/tinymce/plugins/visualchars"
 			}
 		}
 	}
