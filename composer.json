@@ -1,7 +1,7 @@
 {
 	"name":"psi/tinymce_customizer",
 	"description":"CSS Class selection wizard for contao",
-	"keywords":["css class"],
+	"keywords":["tinymce", "contao"],
 	"type":"contao-module",
 	"homepage":"https://github.com/psi-4ward/TinyMCE_Customizer",
 	"license":"LGPL-3.0+",
@@ -27,7 +27,7 @@
 	"extra": {
 		"contao": {
 			"symlinks": {
-				"TL_ROOT/system/modules/TinyMCE_Customizer": "system/modules/_TinyMCE_Customizer",
+				"TL_ROOT/system/modules/TinyMCE_Customizer": "system/modules/TinyMCE_Customizer",
 				"TL_ROOT/assets/tinymce/plugins/contextmenu": "assets/tinymce/plugins/contextmenu",
 				"TL_ROOT/assets/tinymce/plugins/fullscreen": "assets/tinymce/plugins/fullscreen",
 				"TL_ROOT/assets/tinymce/plugins/visualchars": "assets/tinymce/plugins/visualchars"
