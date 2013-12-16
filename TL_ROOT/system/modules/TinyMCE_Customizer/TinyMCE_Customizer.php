@@ -87,7 +87,7 @@ class TinyMCE_Customizer extends \Controller
 							$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')
 								->execute($objCE->pid);
 
-							$objPage = PageModel::findWithDetails($objArticle->pid);
+							$objPage = \PageModel::findWithDetails($objArticle->pid);
 							if(count(array_intersect($objPage->trail, $objUsage->pages)) == 0)
 							{
 								$useIt = false;
