@@ -115,7 +115,7 @@ class TinyMCE_Customizer extends \Controller
 				{
 					$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')->execute($this->Input->get('id'));
 
-					$objPage = PageModel::findWithDetails($objArticle->pid);
+					$objPage = \PageModel::findWithDetails($objArticle->pid);
 					if(!in_array($objPage->layout,$objUsage->layouts))
 					{
 						$useIt = false;
@@ -129,7 +129,7 @@ class TinyMCE_Customizer extends \Controller
 						$objArticle = $this->Database->prepare('SELECT pid FROM tl_article WHERE id=?')
 							->execute($objCE->pid);
 
-						$objPage = PageModel::findWithDetails($objArticle->pid);
+						$objPage = \PageModel::findWithDetails($objArticle->pid);
 						if(!in_array($objPage->layout,$objUsage->layouts))
 						{
 							$useIt = false;
